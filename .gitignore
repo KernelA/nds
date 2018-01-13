@@ -1,0 +1,15 @@
+# C# project
+
+CSharp/.vs/
+
+CSharp/Ndomsort/[Bb]in/
+CSharp/Ndomsort/[Dd]ebug/
+CSharp/Ndomsort/[Oo]bj/
+
+CSharp/*Tests/[Bb]in/
+CSharp/*Tests/[Dd]ebug/
+CSharp/*Tests/[Oo]bj/
+
+
+# Python project
+Python3/__pycache__/
