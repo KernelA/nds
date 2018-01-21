@@ -9,13 +9,17 @@
     <Product>NdsLib</Product>
     <Version>0.1.0</Version>
     <Description>Non-dominated sorting.</Description>
-    <PackageProjectUrl>https://github.com/KernelA/nds</PackageProjectUrl>
+    <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/KernelA/nds</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/KernelA/nds/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.0\Ndomsort.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>

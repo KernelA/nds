@@ -139,7 +139,6 @@ namespace Nds
             /// <paramref name="LeftSeq"/> and <paramref name="RightSeq"/> must have the same lengths.
             /// </para>
             /// </remarks>
-            /// <typeparam name="T">Must support <see cref="IComparable{T}"/> interface.</typeparam>
             /// <param name="LeftSeq"></param>
             /// <param name="RightSeq"></param>
             /// <returns>
@@ -260,7 +259,7 @@ namespace Nds
         /// <summary>
         /// Recursive procedure.
         /// It attributes front's indices to all elements in the <paramref name="SeqUniqObjs"/>, 
-        /// with the indices in the <paramref name="Indices"/>, for the first <param name="CountOfObjs"/> values of the objectives.
+        /// with the indices in the <paramref name="Indices"/>, for the first <paramref name="CountOfObjs"/> values of the objectives.
         /// </summary>to all elements in the <paramref name="SeqUniqObjs"/>
         /// <typeparam name="T"></typeparam>
         /// <param name="SeqUniqObjs">The sequence of the unique objectives.</param>
@@ -322,7 +321,7 @@ namespace Nds
 
         /// <summary>
         /// Recursive procedure. It attributes a front's index to all elements in the <paramref name="SeqUniqObjs"/>, with the indices in the <paramref name="AssignIndices"/>,
-        /// for the first for the first <param name= "CountOfObjs" /> values of the objectives,
+        /// for the first for the first <paramref name= "CountOfObjs" /> values of the objectives,
         /// by comparing them to elements in the <paramref name="SeqUniqObjs"/>, with the indices in the <paramref name="CompIndices"/>.
         /// </summary>
         /// <typeparam name="T"></typeparam>
