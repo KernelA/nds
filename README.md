@@ -11,9 +11,10 @@ It does not require third-party dependencies.
 
 1. Use Visual Studio 2017.
 2. CLI:
+    * `cd Src`
     * Only once, run in command prompt `dotnet restore`.
     * Run `dotnet build -c Release`.
-    * If necessary, run tests `dotnet test ./Src/NdomsortTests/NdomsortTests.csproj`.
+    * If necessary, run tests `dotnet test ./NdomsortTests/NdomsortTests.csproj`.
 
 ## Description of the method
 
