@@ -7,3 +7,7 @@ Src/Ndomsort/[Oo]bj/
 Src/*Tests/[Bb]in/
 Src/*Tests/[Dd]ebug/
 Src/*Tests/[Oo]bj/
+
+Src/Example/[Bb]in/
+Src/Example/[Dd]ebug/
+Src/Example/[Oo]bj/
