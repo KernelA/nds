@@ -1,9 +1,9 @@
-﻿namespace NdomsortTests
+namespace NdomsortTests
 {
     using System;
 
     /// <summary>
-    /// For the tests only.
+    /// For the tests only. 
     /// </summary>
     internal class DoubleClass : IComparable<DoubleClass>, IEquatable<DoubleClass>
     {

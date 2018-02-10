@@ -1,14 +1,15 @@
-// This is an open source non-commercial project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+// This is an open source non-commercial project. Dear PVS-Studio, please check it. PVS-Studio Static
+// Code Analyzer for C, C++ and C#: http://www.viva64.com
 namespace Nds.Tools
 {
     using System;
-    using System.Linq;
-    using System.Linq.Expressions;
     using System.Collections.Generic;
+    using System.Linq;
+
+    using Nds;
 
     /// <summary>
-    /// The additional methods for the <see cref="Ndsort"/>.
+    /// The additional methods for the <see cref="Ndsort"/>. 
     /// </summary>
     public static class Stools
     {
@@ -19,7 +20,7 @@ namespace Nds.Tools
         {
             get
             {
-                if(_globalRand == null)
+                if (_globalRand == null)
                 {
                     _globalRand = new Random();
                 }
@@ -29,11 +30,11 @@ namespace Nds.Tools
         }
 
         /// <summary>
-        /// Swap the elements <paramref name="item1"/> and <paramref name="item2"/>.
+        /// Swap the elements <paramref name="item1"/> and <paramref name="item2"/>. 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="item1">The first element.</param>
-        /// <param name="item2">The second element.</param>
+        /// <param name="item1"> The first element. </param>
+        /// <param name="item2"> The second element. </param>
         private static void Swap<T>(ref T item1, ref T item2)
         {
             T temp = item1;
@@ -42,85 +43,20 @@ namespace Nds.Tools
         }
 
         /// <summary>
-        /// <para>
-        /// Check. Does a <paramref name="LeftVec"/> dominate a <paramref name="RightVec"/>?
-        /// </para>
-        /// <para>
-        /// A <paramref name="LeftVec"/> dominates a <paramref name="RightVec"/>, if and only if <paramref name="LeftVec"/>[i] &lt;= <paramref name="RightVec"/>[i],
-        /// for all i in {0,1,..., len(<paramref name="LeftVec"/>) - 1},  and there exists j in {0,1,...,len(<paramref name="LeftVec"/>) - 1}: <paramref name="LeftVec"/>[j] &lt; <paramref name="RightVec"/>[j].
-        /// </para>
+        /// Find median of sequence, if length of sequence is odd, otherwise the sequence has two
+        /// median. The median is the smallest value from them.
         /// </summary>
-        /// <remarks>
-        /// If <paramref name="LeftVec"/> and <paramref name="RightVec"/> have the length is 0, then the result is false.
-        /// </remarks>
-        /// <typeparam name="T">Must support <see cref="IComparable{T}"/> interface.</typeparam>
-        /// <param name="LeftVec">A first vector of the values.</param>
-        /// <param name="RightVec">A second vector of the values.</param>
-        /// <returns>
-        /// True, if <paramref name="LeftVec"/> dominates a <paramref name="RightVec"/>, otherwise False.
-        /// </returns>
-        /// <exception cref="ArgumentException">If <paramref name="LeftVec"/> and <paramref name="RightVec"/> have different lengths.</exception>
-        /// <exception cref="ArgumentNullException">If <paramref name="LeftVec"/> or <paramref name="RightVec"/> is null.</exception>
-        public static bool IsDominate<T>(IEnumerable<T> LeftVec, IEnumerable<T> RightVec)
-            where T : IComparable<T>
-        {
-            if (LeftVec == null)
-            {
-                throw new ArgumentNullException(nameof(LeftVec));
-            }
-
-            if (RightVec == null)
-            {
-                throw new ArgumentNullException(nameof(RightVec));
-            }
-
-            bool isAllValuesLessOrEqual = true;
-            bool isOneValueLess = false;
-
-            if (LeftVec.Count() != RightVec.Count())
-            {
-                throw new ArgumentException($"{nameof(LeftVec)} must have a same length as {nameof(RightVec)}.");
-            }
-
-            ResComp resComp;
-
-            using (IEnumerator<T> enumLeft = LeftVec.GetEnumerator(), enumRight = RightVec.GetEnumerator())
-            {
-                while (enumLeft.MoveNext() && enumRight.MoveNext())
-                {
-                    T leftItem = enumLeft.Current;
-                    T rightItem = enumRight.Current;
-
-                    resComp = (ResComp)leftItem.CompareTo(rightItem);
-
-                    if (resComp == ResComp.LE)
-                    {
-                        isOneValueLess = true;
-                    }
-                    else if (resComp == ResComp.GR)
-                    {
-                        isAllValuesLessOrEqual = false;
-                        break;
-                    }
-                }
-            }
-
-            return isAllValuesLessOrEqual && isOneValueLess;
-        }
-
-        /// <summary>
-        /// Find median of sequence, if length of sequence is odd, otherwise the sequence has two median. 
-        /// The median is the smallest value from them.
-        /// </summary>
-        /// <remarks>
-        /// Time complexity is O(n), where n is length of the <paramref name="Seq"/>.
-        /// </remarks>
-        /// <typeparam name="T">Must support the <see cref="IComparable{T}"/> interface.</typeparam>
+        /// <remarks> Time complexity is O(n), where n is length of the <paramref name="Seq"/>. </remarks>
+        /// <typeparam name="T"></typeparam>
         /// <param name="Seq"></param>
-        /// <returns>The "median" (a shallow copy, if <typeparamref name="T"/> is reference type) of sequence.</returns>
-        /// <exception cref="ArgumentException">If the length of <paramref name="Seq"/> is 0.</exception>
-        /// <exception cref="ArgumentNullException">If <paramref name="Seq"/>  is null.</exception>
-        public static T FindLowMedian<T>(IReadOnlyCollection<T> Seq) where T : IComparable<T>
+        /// <returns>
+        /// The "median" (a shallow copy, if <typeparamref name="T"/> is reference type) of sequence.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// If the length of <paramref name="Seq"/> is 0.
+        /// </exception>
+        /// <exception cref="ArgumentNullException"> If <paramref name="Seq"/> is null. </exception>
+        public static T FindLowMedian<T>(IReadOnlyCollection<T> Seq, Comparison<T> Cmp)
         {
             if (Seq == null)
             {
@@ -159,7 +95,7 @@ namespace Nds.Tools
 
                 for (int j = left; j <= right; j++)
                 {
-                    resComp = (ResComp)copySeq[j].CompareTo(splitElem);
+                    resComp = ConverterResCmp.ConvertToResCmp(Cmp(copySeq[j], splitElem));
                     if (resComp == ResComp.LE || resComp == ResComp.EQ)
                     {
                         i++;
@@ -178,6 +114,77 @@ namespace Nds.Tools
             }
 
             return copySeq[i];
+        }
+
+        /// <summary>
+        /// <para> Check. Does a <paramref name="LeftVec"/> dominate a <paramref name="RightVec"/>? </para>
+        /// <para>
+        /// A <paramref name="LeftVec"/> dominates a <paramref name="RightVec"/>, if and only if
+        /// <paramref name="LeftVec"/>[i] &lt;= <paramref name="RightVec"/>[i], for all i in
+        /// {0,1,..., len( <paramref name="LeftVec"/>) - 1}, and there exists j in {0,1,...,len(
+        /// <paramref name="LeftVec"/>) - 1}: <paramref name="LeftVec"/>[j] &lt; <paramref name="RightVec"/>[j].
+        /// </para>
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="LeftVec"/> and <paramref name="RightVec"/> have the length is 0, then
+        /// the result is false.
+        /// </remarks>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="LeftVec">  A first vector of the values. </param>
+        /// <param name="RightVec"> A second vector of the values. </param>
+        /// <returns>
+        /// True, if <paramref name="LeftVec"/> dominates a <paramref name="RightVec"/>, otherwise False.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// If <paramref name="LeftVec"/> and <paramref name="RightVec"/> have different lengths.
+        /// </exception>
+        /// <exception cref="ArgumentNullException">
+        /// If <paramref name="LeftVec"/> or <paramref name="RightVec"/> is null.
+        /// </exception>
+        public static bool IsDominate<T>(IEnumerable<T> LeftVec, IEnumerable<T> RightVec, Comparison<T> Cmp)
+        {
+            if (LeftVec == null)
+            {
+                throw new ArgumentNullException(nameof(LeftVec));
+            }
+
+            if (RightVec == null)
+            {
+                throw new ArgumentNullException(nameof(RightVec));
+            }
+
+            bool isAllValuesLessOrEqual = true;
+            bool isOneValueLess = false;
+
+            if (LeftVec.Count() != RightVec.Count())
+            {
+                throw new ArgumentException($"{nameof(LeftVec)} must have a same length as {nameof(RightVec)}.");
+            }
+
+            ResComp resComp;
+
+            using (IEnumerator<T> enumLeft = LeftVec.GetEnumerator(), enumRight = RightVec.GetEnumerator())
+            {
+                while (enumLeft.MoveNext() && enumRight.MoveNext())
+                {
+                    T leftItem = enumLeft.Current;
+                    T rightItem = enumRight.Current;
+
+                    resComp = ConverterResCmp.ConvertToResCmp(Cmp(leftItem, rightItem));
+
+                    if (resComp == ResComp.LE)
+                    {
+                        isOneValueLess = true;
+                    }
+                    else if (resComp == ResComp.GR)
+                    {
+                        isAllValuesLessOrEqual = false;
+                        break;
+                    }
+                }
+            }
+
+            return isAllValuesLessOrEqual && isOneValueLess;
         }
     }
 }

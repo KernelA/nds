@@ -2,15 +2,34 @@ namespace Example
 {
     using System;
     using System.Linq;
+
     using Nds;
 
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static int CmpInt(int X, int Y)
+        {
+            if (X < Y)
+            {
+                return -1;
+            }
+            else if (X > Y)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        private static void Main(string[] args)
         {
             int[][] seq1 = new int[10][];
 
             Random rand = new Random(6);
+
+            Ndsort<int> nds = new Ndsort<int>(CmpInt);
 
             for (int i = 0; i < seq1.Length; i++)
             {
@@ -22,13 +41,12 @@ namespace Example
                 }
             }
 
-            int[] fronts1 = Ndsort.NonDominSort(seq1);
-
+            int[] fronts1 = nds.NonDominSort(seq1);
 
             var seq2 = from item in seq1
                        select new { fitness = item };
 
-            int[] fronts2 = Ndsort.NonDominSort(seq2, item => item.fitness);
+            int[] fronts2 = nds.NonDominSort(seq2, item => item.fitness);
 
             Console.WriteLine(fronts1.SequenceEqual(fronts2));
             Console.ReadKey();
