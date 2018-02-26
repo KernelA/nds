@@ -9,7 +9,7 @@ namespace Nds.Tools
     using Nds;
 
     /// <summary>
-    /// The additional methods for the <see cref="Ndsort"/>. 
+    /// The additional methods for the <see cref="Ndsort{TObj}"/>. 
     /// </summary>
     public static class Stools
     {
@@ -49,6 +49,7 @@ namespace Nds.Tools
         /// <remarks> Time complexity is O(n), where n is length of the <paramref name="Seq"/>. </remarks>
         /// <typeparam name="T"></typeparam>
         /// <param name="Seq"></param>
+        /// <param name="Cmp"> <see cref="Comparer{T}"/> </param>
         /// <returns>
         /// The "median" (a shallow copy, if <typeparamref name="T"/> is reference type) of sequence.
         /// </returns>
@@ -130,8 +131,9 @@ namespace Nds.Tools
         /// the result is false.
         /// </remarks>
         /// <typeparam name="T"></typeparam>
-        /// <param name="LeftVec">  A first vector of the values. </param>
+        /// <param name="LeftVec"> A first vector of the values. </param>
         /// <param name="RightVec"> A second vector of the values. </param>
+        /// <param name="Cmp"> <see cref="Comparison{T}"/> </param>
         /// <returns>
         /// True, if <paramref name="LeftVec"/> dominates a <paramref name="RightVec"/>, otherwise False.
         /// </returns>

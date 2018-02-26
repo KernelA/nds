@@ -6,7 +6,7 @@ namespace Nds.Extensions
     using System.Collections.Generic;
 
     /// <summary>
-    /// Extensions for the <see cref="IEnumerable{T}"/>, where T supports <see cref="IComparable{T}"/>. 
+    /// Extensions for the <see cref="IEnumerable{T}"/>. 
     /// </summary>
     internal static class SeqIComparableExtensions
     {
@@ -40,8 +40,8 @@ namespace Nds.Extensions
         /// <summary>
         /// Find a minimum and maximum value in the <see cref="IEnumerable{T}"/>. 
         /// </summary>
-        /// <param name="Seq">     </param>
-        /// <param name="Cmp">      <see cref="Comparison{T}"/>. </param>
+        /// <param name="Seq"></param>
+        /// <param name="Cmp"> <see cref="Comparison{T}"/>. </param>
         /// <param name="MinValue"> A minimum value of the <paramref name="Seq"/>. </param>
         /// <param name="MaxValue"> A maximum value of the <paramref name="Seq"/>. </param>
         /// <exception cref="ArgumentNullException">

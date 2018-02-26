@@ -88,11 +88,9 @@ namespace Nds
         /// to all elements in the 
         /// <paramref name="SeqUniqObjs"/>
         /// <param name="SeqUniqObjs"> The sequence of the unique objectives. </param>
-        /// <param name="Fronts">      The values of the fronts. </param>
-        /// <param name="Indices">     The indices of the <paramref name="SeqUniqObjs"/>. </param>
-        /// <param name="CountOfObjs">
-        /// The number of the values from the objectives, for the sorting.
-        /// </param>
+        /// <param name="Fronts"> The values of the fronts. </param>
+        /// <param name="Indices"> The indices of the <paramref name="SeqUniqObjs"/>. </param>
+        /// <param name="CountOfObjs"> The number of the values from the objectives, for the sorting. </param>
         private void NdHelperA(IReadOnlyList<TObj>[] SeqUniqObjs, int[] Fronts, LinkedList<int> Indices, int CountOfObjs)
         {
             if (Indices.Count < 2)
@@ -148,13 +146,11 @@ namespace Nds
         /// for the first for the first <paramref name="CountOfObjs"/> values of the objectives, by
         /// comparing them to elements in the <paramref name="SeqUniqObjs"/>, with the indices in the <paramref name="CompIndices"/>.
         /// </summary>
-        /// <param name="SeqUniqObjs">   The sequence of the unique objectives. </param>
-        /// <param name="Fronts">        The values of the fronts. </param>
-        /// <param name="CompIndices">   The indices for comparing. </param>
+        /// <param name="SeqUniqObjs"> The sequence of the unique objectives. </param>
+        /// <param name="Fronts"> The values of the fronts. </param>
+        /// <param name="CompIndices"> The indices for comparing. </param>
         /// <param name="AssignIndices"> The indices for assign front. </param>
-        /// <param name="CountOfObjs">  
-        /// The number of the values from the objectives, for the sorting.
-        /// </param>
+        /// <param name="CountOfObjs"> The number of the values from the objectives, for the sorting. </param>
         private void NdHelperB(IReadOnlyList<TObj>[] SeqUniqObjs, int[] Fronts, LinkedList<int> CompIndices, LinkedList<int> AssignIndices, int CountOfObjs)
         {
             if (CompIndices.Count == 0 || AssignIndices.Count == 0)
@@ -325,17 +321,15 @@ namespace Nds
         /// <summary>
         /// <paramref name="Indices"/> splits into three lists. 
         /// </summary>
-        /// <param name="SeqUniqObjs">       The sequence of the unique objectives. </param>
-        /// <param name="Indices">           The indices of the <paramref name="SeqUniqObjs"/>. </param>
-        /// <param name="SplitValue">        A value for the splitting. </param>
-        /// <param name="IndexOfValue">     
-        /// The index of the value in the objectives, for the split.
-        /// </param>
-        /// <param name="LessSplitValue">   
+        /// <param name="SeqUniqObjs"> The sequence of the unique objectives. </param>
+        /// <param name="Indices"> The indices of the <paramref name="SeqUniqObjs"/>. </param>
+        /// <param name="SplitValue"> A value for the splitting. </param>
+        /// <param name="IndexOfValue"> The index of the value in the objectives, for the split. </param>
+        /// <param name="LessSplitValue">
         /// The indices, where the <paramref name="IndexOfValue"/> th value of the objectives is less
         /// than <paramref name="SplitValue"/>.
         /// </param>
-        /// <param name="EqualSplitValue">  
+        /// <param name="EqualSplitValue">
         /// The indices, where the <paramref name="IndexOfValue"/> th value of the objectives are
         /// equal to <paramref name="SplitValue"/>.
         /// </param>
@@ -381,8 +375,8 @@ namespace Nds
         /// line-sweep algorithm.
         /// </summary>
         /// <param name="SeqUniqObjs"> The sequence of the unique objectives. </param>
-        /// <param name="Fronts">      The values of the fronts. </param>
-        /// <param name="Indices">     The indices of the <paramref name="SeqUniqObjs"/>. </param>
+        /// <param name="Fronts"> The values of the fronts. </param>
+        /// <param name="Indices"> The indices of the <paramref name="SeqUniqObjs"/>. </param>
         private void SweepA(IReadOnlyList<TObj>[] SeqUniqObjs, int[] Fronts, LinkedList<int> Indices)
         {
             HashSet<int> initInd = new HashSet<int>();
@@ -434,9 +428,9 @@ namespace Nds
         /// <paramref name="SeqUniqObjs"/>, with the indices in the <paramref name="CompIndices"/>,
         /// using a line-sweep algorithm.
         /// </summary>
-        /// <param name="SeqUniqObjs">   The sequence of the unique objectives. </param>
-        /// <param name="Fronts">        The values of the fronts. </param>
-        /// <param name="CompIndices">   The indices for comparing. </param>
+        /// <param name="SeqUniqObjs"> The sequence of the unique objectives. </param>
+        /// <param name="Fronts"> The values of the fronts. </param>
+        /// <param name="CompIndices"> The indices for comparing. </param>
         /// <param name="AssignIndices"> The indices for assign front. </param>
         private void SweepB(IReadOnlyList<TObj>[] SeqUniqObjs, int[] Fronts, LinkedList<int> CompIndices, LinkedList<int> AssignIndices)
         {
@@ -553,7 +547,7 @@ namespace Nds
             /// <paramref name="LeftSeq"/> and <paramref name="RightSeq"/> must have the same lengths.
             /// </para>
             /// </remarks>
-            /// <param name="LeftSeq"> </param>
+            /// <param name="LeftSeq"></param>
             /// <param name="RightSeq"></param>
             /// <returns>
             /// -1, if <paramref name="LeftSeq"/> is lexicographically less than <paramref name="RightSeq"/>.
@@ -655,14 +649,14 @@ namespace Nds
         /// </summary>
         /// <typeparam name="TDecision"> A type of the decision. </typeparam>
         /// <param name="SeqDecisions"> The sequence of the decisions. </param>
-        /// <param name="GetObjs">     
+        /// <param name="GetObjs">
         /// The function which maps a decision space into a objectives space.
         /// </param>
         /// <returns> The indices of the fronts. </returns>
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="SeqDecisions"/> or <paramref name="GetObjs"/> is null.
         /// </exception>
-        /// <exception cref="ArgumentException"> See correspond exception in the <see cref="Ndsort.NonDominSortObj{T}(IEnumerable{IReadOnlyList{T}})"/>. </exception>
+        /// <exception cref="ArgumentException"> See correspond exception in the <see cref="Ndsort{TObj}.NonDominSort(IEnumerable{IReadOnlyList{TObj}})"/>. </exception>
         public int[] NonDominSort<TDecision>(IEnumerable<TDecision> SeqDecisions, Func<TDecision, IReadOnlyList<TObj>> GetObjs)
         {
             if (GetObjs == null)

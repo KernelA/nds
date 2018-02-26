@@ -27,10 +27,7 @@ namespace Nds
     }
 
     /// <summary>
-    /// <para>
-    /// The result of the comparison, which returns from the
-    /// <see cref="IComparable{T}.CompareTo(T)"/> or <see cref="Comparison{T}"/>.
-    /// </para>
+    /// <para> The result of the comparison. </para>
     /// <list type="bullet">
     /// <listheader>
     /// <term> Description </term>

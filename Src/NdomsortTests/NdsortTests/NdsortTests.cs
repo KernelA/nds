@@ -18,7 +18,7 @@ namespace NdomsortTests.NdsortTests
         /// <paramref name="Number"/> to the <paramref name="Exp"/> th power. 
         /// </summary>
         /// <param name="Number"> Must be greater than 0. </param>
-        /// <param name="Exp">    Must be greater than 0. </param>
+        /// <param name="Exp"> Must be greater than 0. </param>
         private int IntPow(int Number, int Exp)
         {
             int res = 1;
@@ -217,7 +217,7 @@ namespace NdomsortTests.NdsortTests
         /// A simple random permutation with uniform distribution. 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="Seq">    </param>
+        /// <param name="Seq"></param>
         /// <param name="RandGen"></param>
         private void RandomPermutation<T>(IList<T> Seq, System.Random RandGen)
         {
