@@ -10,13 +10,25 @@ namespace Nds.Extensions
     /// </summary>
     internal static class SeqIComparableExtensions
     {
+        /// <summary>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="Seq"></param>
+        /// <param name="OtherSeq"></param>
+        /// <param name="Cmp"></param>
+        /// <returns>
+        /// <para>
+        /// true, if <paramref name="Seq"/> and <paramref name="OtherSeq"/> are empty or they have
+        /// equal size and their elements are equal, otherwise false.
+        /// </para>
+        /// </returns>
         public static bool CmpSeqEqual<T>(this IEnumerable<T> Seq, IEnumerable<T> OtherSeq, Comparison<T> Cmp)
         {
-            bool isEqual = true, isEnd1, isEnd2;
+            bool isEqual = true, isNotEnd1, isNotEnd2;
 
             using (IEnumerator<T> enum1 = Seq.GetEnumerator(), enum2 = OtherSeq.GetEnumerator())
             {
-                while (!(isEnd1 = enum1.MoveNext()) & !(isEnd2 = enum2.MoveNext()))
+                while ((isNotEnd1 = enum1.MoveNext()) & (isNotEnd2 = enum2.MoveNext()))
                 {
                     T elem1 = enum1.Current;
                     T elem2 = enum2.Current;
@@ -28,7 +40,7 @@ namespace Nds.Extensions
                     }
                 }
 
-                if (!isEnd1 || !isEnd2)
+                if (!isNotEnd1 || !isNotEnd2)
                 {
                     isEqual = false;
                 }

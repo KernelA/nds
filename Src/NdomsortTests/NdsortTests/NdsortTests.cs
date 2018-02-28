@@ -14,6 +14,57 @@ namespace NdomsortTests.NdsortTests
     {
         private const int SEED = 4;
 
+        private void CheckFronts<T>(T[][] Seq, int[] Fronts) where T : IComparable<T>
+        {
+            int totalFronts = Fronts.Max() + 1;
+
+            var intersection = Fronts.Intersect(Enumerable.Range(0, totalFronts));
+
+            Assert.True(intersection.Count() == totalFronts);
+
+            // Transform to the dictionary.
+            var keyValues = from item in Fronts.Zip(Seq, (front, oneSeq) => new KeyValuePair<int, T[]>(front, oneSeq))
+                            select item;
+
+            Dictionary<int, LinkedList<T[]>> dict = new Dictionary<int, LinkedList<T[]>>(Fronts.Max() + 1);
+
+            // Create dictionary. Keys are indices of the fronts. Values are the sequences correspond
+            // to the index of the front.
+            foreach (var keyValue in keyValues)
+            {
+                if (dict.ContainsKey(keyValue.Key))
+                {
+                    dict[keyValue.Key].AddLast(keyValue.Value);
+                }
+                else
+                {
+                    var value = new LinkedList<T[]>();
+                    value.AddLast(keyValue.Value);
+                    dict.Add(keyValue.Key, value);
+                }
+            }
+
+            foreach (int frontIndex in Enumerable.Range(0, dict.Keys.Count - 1))
+            {
+                foreach (T[] seqCurrFront in dict[frontIndex])
+                {
+                    foreach (T[] seqCurrFront2 in dict[frontIndex])
+                    {
+                        if (!seqCurrFront.SequenceEqual(seqCurrFront2))
+                        {
+                            Assert.False(Stools.IsDominate(seqCurrFront, seqCurrFront2, Cmp.CmpByIComparable));
+                            Assert.False(Stools.IsDominate(seqCurrFront2, seqCurrFront, Cmp.CmpByIComparable));
+                        }
+                    }
+
+                    foreach (T[] seqNextFront in dict[frontIndex + 1])
+                    {
+                        Assert.False(Stools.IsDominate(seqNextFront, seqCurrFront, Cmp.CmpByIComparable));
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// <paramref name="Number"/> to the <paramref name="Exp"/> th power. 
         /// </summary>
@@ -146,53 +197,34 @@ namespace NdomsortTests.NdsortTests
 
                 int[] resFronts = new Nds.Ndsort<int>(Cmp.CmpByIComparable).NonDominSort(seq);
 
-                int totalFronts = resFronts.Max() + 1;
+                CheckFronts(seq, resFronts);
+            }
+        }
 
-                var intersection = resFronts.Intersect(Enumerable.Range(0, totalFronts));
+        [Fact]
+        private void NdsortSortRandomSeqTest()
+        {
+            int[][] seq = new int[100][];
 
-                Assert.True(intersection.Count() == totalFronts);
+            Nds.Ndsort<int> nds = new Nds.Ndsort<int>(Cmp.CmpByIComparable);
 
-                // Transform to the dictionary.
-                var keyValues = from item in resFronts.Zip(seq, (front, oneSeq) => new KeyValuePair<int, int[]>(front, oneSeq))
-                                select item;
+            Random rand = new Random(SEED);
 
-                Dictionary<int, LinkedList<int[]>> dict = new Dictionary<int, LinkedList<int[]>>(resFronts.Max() + 1);
-
-                // Create dictionary. Keys are indices of the fronts. Values are the sequences
-                // correspond to the index of the front.
-                foreach (var keyValue in keyValues)
+            for (int dim = 2; dim < 6; dim++)
+            {
+                for (int i = 0; i < seq.Length; i++)
                 {
-                    if (dict.ContainsKey(keyValue.Key))
+                    seq[i] = new int[dim];
+
+                    for (int j = 0; j < seq[i].Length; j++)
                     {
-                        dict[keyValue.Key].AddLast(keyValue.Value);
-                    }
-                    else
-                    {
-                        var value = new LinkedList<int[]>();
-                        value.AddLast(keyValue.Value);
-                        dict.Add(keyValue.Key, value);
+                        seq[i][j] = rand.Next(-500, 501);
                     }
                 }
 
-                foreach (int frontIndex in Enumerable.Range(0, dict.Keys.Count - 1))
-                {
-                    foreach (int[] seqCurrFront in dict[frontIndex])
-                    {
-                        foreach (int[] seqCurrFront2 in dict[frontIndex])
-                        {
-                            if (!seqCurrFront.SequenceEqual(seqCurrFront2))
-                            {
-                                Assert.False(Stools.IsDominate(seqCurrFront, seqCurrFront2, Cmp.CmpByIComparable));
-                                Assert.False(Stools.IsDominate(seqCurrFront2, seqCurrFront, Cmp.CmpByIComparable));
-                            }
-                        }
+                int[] fronts = nds.NonDominSort(seq);
 
-                        foreach (int[] seqNextFront in dict[frontIndex + 1])
-                        {
-                            Assert.False(Stools.IsDominate(seqNextFront, seqCurrFront, Cmp.CmpByIComparable));
-                        }
-                    }
-                }
+                CheckFronts(seq, fronts);
             }
         }
 

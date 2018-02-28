@@ -90,7 +90,9 @@ namespace Nds
         /// <param name="SeqUniqObjs"> The sequence of the unique objectives. </param>
         /// <param name="Fronts"> The values of the fronts. </param>
         /// <param name="Indices"> The indices of the <paramref name="SeqUniqObjs"/>. </param>
-        /// <param name="CountOfObjs"> The number of the values from the objectives, for the sorting. </param>
+        /// <param name="CountOfObjs">
+        /// The number of the values from the objectives, for the sorting.
+        /// </param>
         private void NdHelperA(IReadOnlyList<TObj>[] SeqUniqObjs, int[] Fronts, LinkedList<int> Indices, int CountOfObjs)
         {
             if (Indices.Count < 2)
@@ -150,7 +152,9 @@ namespace Nds
         /// <param name="Fronts"> The values of the fronts. </param>
         /// <param name="CompIndices"> The indices for comparing. </param>
         /// <param name="AssignIndices"> The indices for assign front. </param>
-        /// <param name="CountOfObjs"> The number of the values from the objectives, for the sorting. </param>
+        /// <param name="CountOfObjs">
+        /// The number of the values from the objectives, for the sorting.
+        /// </param>
         private void NdHelperB(IReadOnlyList<TObj>[] SeqUniqObjs, int[] Fronts, LinkedList<int> CompIndices, LinkedList<int> AssignIndices, int CountOfObjs)
         {
             if (CompIndices.Count == 0 || AssignIndices.Count == 0)
