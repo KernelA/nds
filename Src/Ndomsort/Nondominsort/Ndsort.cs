@@ -345,11 +345,11 @@ namespace Nds
             out LinkedList<int> LessSplitValue, out LinkedList<int> EqualSplitValue, out LinkedList<int> GreaterSplitValue)
         {
             LessSplitValue = new LinkedList<int>();
-            ;
+            
             EqualSplitValue = new LinkedList<int>();
-            ;
+            
             GreaterSplitValue = new LinkedList<int>();
-            ;
+            
 
             ResComp resComp;
 

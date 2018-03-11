@@ -50,11 +50,9 @@ namespace NdomsortTests.NdsortTests
                 {
                     foreach (T[] seqCurrFront2 in dict[frontIndex])
                     {
-                        if (!seqCurrFront.SequenceEqual(seqCurrFront2))
-                        {
+
                             Assert.False(Stools.IsDominate(seqCurrFront, seqCurrFront2, Cmp.CmpByIComparable));
                             Assert.False(Stools.IsDominate(seqCurrFront2, seqCurrFront, Cmp.CmpByIComparable));
-                        }
                     }
 
                     foreach (T[] seqNextFront in dict[frontIndex + 1])
@@ -199,6 +197,25 @@ namespace NdomsortTests.NdsortTests
 
                 CheckFronts(seq, resFronts);
             }
+        }
+
+        [Fact]
+        private void NdsortTwoFront2Test()
+        {
+            int[][] seq = new int[3][];
+
+            int[] exactFronts = { 0, 1, 1 };
+
+            seq[0] = new int[4] { 1, 3, 0, 1};
+            seq[1] = new int[4] { 1, 4, 5, 1};
+            seq[2] = new int[4] { 3, 4, 3, 1};
+
+            var nds = new Nds.Ndsort<int>(Cmp.CmpByIComparable);
+
+            int[] fronts = nds.NonDominSort(seq);
+
+            Assert.True(fronts.SequenceEqual(exactFronts));
+
         }
 
         [Fact]
