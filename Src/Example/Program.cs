@@ -48,7 +48,20 @@ namespace Example
 
             int[] fronts2 = nds.NonDominSort(seq2, item => item.fitness);
 
-            Console.WriteLine(fronts1.SequenceEqual(fronts2));
+            Console.WriteLine($"The fronts are equal: {fronts1.SequenceEqual(fronts2)}.");
+
+            var groupedFronts = fronts1.Zip(seq1, (front, seq) => new ValueTuple<int, int[]>(front, seq)).GroupBy(tuple => tuple.Item1, tuple => tuple.Item2);
+
+            foreach (var front in groupedFronts)
+            {
+                Console.WriteLine($"The front index is {front.Key}.");
+
+                foreach (var seq in front)
+                {
+                    Console.WriteLine($"\t({seq.Select(num => num.ToString()).Aggregate((num1, num2) => num1 + ", " + num2)})");
+                }
+            }
+
             Console.ReadKey();
         }
     }
