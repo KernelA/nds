@@ -10,9 +10,8 @@ It does not require third-party dependencies.
 ## Building
 
 1. Use Visual Studio 2017.
-2. CLI:
+2. [CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x):
     * `cd Src`
-    * Only once, run in command prompt `dotnet restore`.
     * Run `dotnet build -c Release`.
     * If necessary, run tests `dotnet test ./NdomsortTests/NdomsortTests.csproj`.
 
