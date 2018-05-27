@@ -9,8 +9,8 @@ It does not require third-party dependencies.
 
 ## Building
 
-1. Use Visual Studio 2017.
-2. [CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x):
+* Use Visual Studio 2017.
+* Or [CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x):
     * `cd Src`
     * Run `dotnet build -c Release`.
     * If necessary, run tests `dotnet test ./NdomsortTests/NdomsortTests.csproj`.
@@ -23,7 +23,7 @@ Buzdalov M., Shalyto A. A Provably Asymptotically Fast Version of the Generalize
 
 ## Other implementations
 
-* [Java](https://github.com/mbuzdalov/non-dominated-sorting)
+* [Java (Jensen-Fortin-Buzdalov divide-and-conquer method)](https://github.com/mbuzdalov/non-dominated-sorting)
 * [Python](https://github.com/KernelA/nds-py)
 
 ## How to use
