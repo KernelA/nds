@@ -32,7 +32,7 @@ namespace Nds
         /// <returns> The ordered list of indices. </returns>
         private LinkedList<int> MergeLists(LinkedList<int> indices1, LinkedList<int> indices2)
         {
-            LinkedList<int> mergedList = new LinkedList<int>();
+            var mergedList = new LinkedList<int>();
 
             bool isEnd1 = false;
             bool isEnd2 = false;

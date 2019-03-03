@@ -33,7 +33,7 @@ namespace Nds.Extensions
                     T elem1 = enum1.Current;
                     T elem2 = enum2.Current;
 
-                    if (Cmp(elem1, elem2) != 0)
+                    if (ConverterResCmp.ConvertToResCmp(Cmp(elem1, elem2)) != ResComp.EQ)
                     {
                         isEqual = false;
                         break;

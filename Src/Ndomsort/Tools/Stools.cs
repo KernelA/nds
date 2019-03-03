@@ -46,7 +46,7 @@ namespace Nds.Tools
         /// Find median of sequence, if length of sequence is odd, otherwise the sequence has two
         /// median. The median is the smallest value from them.
         /// </summary>
-        /// <remarks> Time complexity is O(n), where n is length of the <paramref name="Seq"/>. </remarks>
+        /// <remarks>Time complexity is O(n) in mean, where n is length of the <paramref name="Seq"/>. </remarks>
         /// <typeparam name="T"></typeparam>
         /// <param name="Seq"></param>
         /// <param name="Cmp"> <see cref="Comparer{T}"/> </param>
@@ -56,7 +56,7 @@ namespace Nds.Tools
         /// <exception cref="ArgumentException">
         /// If the length of <paramref name="Seq"/> is 0.
         /// </exception>
-        /// <exception cref="ArgumentNullException"> If <paramref name="Seq"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> If <paramref name="Seq"/> or <paramref name="Cmp"/> is null. </exception>
         public static T FindLowMedian<T>(IReadOnlyCollection<T> Seq, Comparison<T> Cmp)
         {
             if (Seq == null)
@@ -64,20 +64,17 @@ namespace Nds.Tools
                 throw new ArgumentNullException(nameof(Seq));
             }
 
+            if (Cmp == null)
+            {
+                throw new ArgumentNullException(nameof(Cmp));
+            }
+
             if (Seq.Count == 0)
             {
                 throw new ArgumentException($"The length of {nameof(Seq)} is 0.", nameof(Seq));
             }
 
-            T[] copySeq = new T[Seq.Count];
-
-            int indexArray = 0;
-
-            foreach (T item in Seq)
-            {
-                copySeq[indexArray] = item;
-                indexArray++;
-            }
+            T[] copySeq = Seq.ToArray();
 
             int medianIndex = (Seq.Count - 1) / 2, left = 0, right = Seq.Count - 1;
             int i = -1, swapIndex = 0;
@@ -97,6 +94,7 @@ namespace Nds.Tools
                 for (int j = left; j <= right; j++)
                 {
                     resComp = ConverterResCmp.ConvertToResCmp(Cmp(copySeq[j], splitElem));
+
                     if (resComp == ResComp.LE || resComp == ResComp.EQ)
                     {
                         i++;
@@ -155,14 +153,13 @@ namespace Nds.Tools
                 throw new ArgumentNullException(nameof(RightVec));
             }
 
-            bool isAllValuesLessOrEqual = true;
-            bool isOneValueLess = false;
-
             if (LeftVec.Count() != RightVec.Count())
             {
                 throw new ArgumentException($"{nameof(LeftVec)} must have a same length as {nameof(RightVec)}.");
             }
 
+            bool isAllValuesLessOrEqual = true;
+            bool isOneValueLess = false;
             ResComp resComp;
 
             using (IEnumerator<T> enumLeft = LeftVec.GetEnumerator(), enumRight = RightVec.GetEnumerator())
