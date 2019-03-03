@@ -13,6 +13,7 @@
     <RepositoryUrl>https://github.com/KernelA/nds</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/KernelA/nds/blob/master/LICENSE</PackageLicenseUrl>
     <RootNamespace>Nds</RootNamespace>
+    <PackageTags />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
