@@ -29,8 +29,9 @@ namespace Example
 
             Random rand = new Random(6);
 
-            Ndsort<int> nds = new Ndsort<int>(CmpInt);
+            var nds = new Ndsort<int>(CmpInt);
 
+            // A first way.
             for (int i = 0; i < seq1.Length; i++)
             {
                 seq1[i] = new int[4];
@@ -43,12 +44,13 @@ namespace Example
 
             int[] fronts1 = nds.NonDominSort(seq1);
 
+            // A second way. 
             var seq2 = from item in seq1
                        select new { fitness = item };
 
             int[] fronts2 = nds.NonDominSort(seq2, item => item.fitness);
 
-            Console.WriteLine($"The fronts are equal: {fronts1.SequenceEqual(fronts2)}.");
+            Console.WriteLine($"Are the fronts equal? {fronts1.SequenceEqual(fronts2)}.");
 
             var groupedFronts = fronts1.Zip(seq1, (front, seq) => new ValueTuple<int, int[]>(front, seq)).GroupBy(tuple => tuple.Item1, tuple => tuple.Item2);
 
@@ -58,7 +60,7 @@ namespace Example
 
                 foreach (var seq in front)
                 {
-                    Console.WriteLine($"\t({seq.Select(num => num.ToString()).Aggregate((num1, num2) => num1 + ", " + num2)})");
+                    Console.WriteLine($"\t({seq.Select(num => num.ToString()).Aggregate((num1, num2) => $"{num1, 4}, {num2, 4}")})");
                 }
             }
 
