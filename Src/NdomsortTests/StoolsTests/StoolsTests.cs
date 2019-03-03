@@ -62,7 +62,7 @@ namespace NdomsortTests.StoolsTests
         {
             int[] seq = null;
 
-            Assert.Throws<ArgumentNullException>(() => Stools.FindLowMedian(seq, (a, b) => a.CompareTo(b)));
+            Assert.Throws<ArgumentNullException>(() => Stools.FindLowMedian(seq, Cmp.CmpByIComparable));
         }
 
         [Fact]

@@ -7,13 +7,11 @@ namespace NdomsortTests
     /// </summary>
     internal class DoubleClass : IComparable<DoubleClass>, IEquatable<DoubleClass>
     {
-        private double _value;
-
-        public double Value => _value;
+        public double Value { get; private set; }
 
         public DoubleClass(double Value)
         {
-            _value = Value;
+            this.Value = Value;
         }
 
         public int CompareTo(DoubleClass Other)
