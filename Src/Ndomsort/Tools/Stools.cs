@@ -13,21 +13,6 @@ namespace Nds.Tools
     /// </summary>
     public static class Stools
     {
-        [ThreadStatic]
-        private static Random _globalRand;
-
-        private static Random GlobalRand
-        {
-            get
-            {
-                if (_globalRand == null)
-                {
-                    _globalRand = new Random();
-                }
-
-                return _globalRand;
-            }
-        }
 
         /// <summary>
         /// Swap the elements <paramref name="item1"/> and <paramref name="item2"/>. 
@@ -77,17 +62,12 @@ namespace Nds.Tools
             T[] copySeq = Seq.ToArray();
 
             int medianIndex = (Seq.Count - 1) / 2, left = 0, right = Seq.Count - 1;
-            int i = -1, swapIndex = 0;
+            int i = -1;
             ResComp resComp;
+
 
             while (medianIndex != i)
             {
-                if (left != right)
-                {
-                    swapIndex = GlobalRand.Next(left, right);
-                    Swap(ref copySeq[left], ref copySeq[right]);
-                }
-
                 T splitElem = copySeq[right];
                 i = left - 1;
 
