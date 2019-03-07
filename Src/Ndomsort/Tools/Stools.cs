@@ -59,40 +59,48 @@ namespace Nds.Tools
                 throw new ArgumentException($"The length of {nameof(Seq)} is 0.", nameof(Seq));
             }
 
-            T[] copySeq = Seq.ToArray();
-
-            int medianIndex = (Seq.Count - 1) / 2, left = 0, right = Seq.Count - 1;
-            int i = -1;
-            ResComp resComp;
-
-
-            while (medianIndex != i)
+            if(Seq.Count == 1)
             {
-                T splitElem = copySeq[right];
-                i = left - 1;
+                return Seq.First();
+            }
+            else
+            {
+                T[] copySeq = Seq.ToArray();
 
-                for (int j = left; j <= right; j++)
+                int medianIndex = (Seq.Count - 1) / 2, left = 0, right = Seq.Count - 1;
+                int i = -1;
+                ResComp resComp;
+
+
+                do
                 {
-                    resComp = ConverterResCmp.ConvertToResCmp(Cmp(copySeq[j], splitElem));
+                    T splitElem = copySeq[right];
+                    i = left - 1;
 
-                    if (resComp == ResComp.LE || resComp == ResComp.EQ)
+                    for (int j = left; j <= right; j++)
                     {
-                        i++;
-                        Swap(ref copySeq[i], ref copySeq[j]);
+                        resComp = ConverterResCmp.ConvertToResCmp(Cmp(copySeq[j], splitElem));
+
+                        if (resComp == ResComp.LE || resComp == ResComp.EQ)
+                        {
+                            i++;
+                            Swap(ref copySeq[i], ref copySeq[j]);
+                        }
+                    }
+
+                    if (i < medianIndex)
+                    {
+                        left = i + 1;
+                    }
+                    else if (i > medianIndex)
+                    {
+                        right = i - 1;
                     }
                 }
+                while (medianIndex != i);
 
-                if (i < medianIndex)
-                {
-                    left = i + 1;
-                }
-                else if (i > medianIndex)
-                {
-                    right = i - 1;
-                }
+                return copySeq[i];
             }
-
-            return copySeq[i];
         }
 
         /// <summary>
