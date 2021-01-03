@@ -13,7 +13,7 @@ It does not require third-party dependencies.
 * Or [CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x):
     * `cd Src`
     * Run `dotnet build -c Release`.
-    * If necessary, run tests `dotnet test ./NdomsortTests/NdomsortTests.csproj`.
+    * If necessary, run tests `dotnet test -c Release .`.
 
 ## Description of the method
 
