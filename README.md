@@ -29,3 +29,8 @@ Buzdalov M., Shalyto A. A Provably Asymptotically Fast Version of the Generalize
 ## How to use
 
 See `Example` in the solution.
+
+
+## Example
+
+![Pareto front figure](docs/fronts.svg)
